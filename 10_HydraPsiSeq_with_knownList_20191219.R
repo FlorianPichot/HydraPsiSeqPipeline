@@ -16,9 +16,9 @@ setwd(extDataDir)
 project <-sub('.*\\/', '', extDataDir) #FIND THE LAST "/" in the path and return the right string
 project
 
-####### Zone à modifier #######
+####### Zone Ã  modifier #######
 
-####### Déroulement du programme #######
+####### DÃ©roulement du programme #######
 
 #################CREATE FOLDER FOR ANALYSIS
 ProjectDir <- paste0("D:/R_folder/",project)
@@ -36,8 +36,7 @@ DataDirs <- list.dirs(extDataDir, full.names = TRUE, recursive = FALSE)
 DataDirs					#FULL path format
 
 setwd(extDataDir)
-ModList<- read.csv(ModList_File, sep=",", header = FALSE)
-colnames(ModList)<-c("RNA","position","Known_Modif","new", "class", "IVT","snoRNA")
+ModList<- read.csv(ModList_File, sep=",", header = TRUE)
 ModList$new<-NULL
 
 setwd(ResultsDir)
@@ -52,7 +51,7 @@ for (z in DataDirs) {
 
 bilanPsi<-as.data.frame(matrix(,ncol=18,nrow=0)) # with 18 columns, may also define rows
 
-# Création de la table de référence pour les ARN
+# CrÃ©ation de la table de rÃ©fÃ©rence pour les ARN
 Sample_files <- list.files(z, pattern=count_files, recursive=F, full.names = TRUE)
 RNA_list<-basename(Sample_files)
 type <- as.list (RNA_list)
@@ -91,8 +90,8 @@ results <- merge(sample,ModListRNAPsi[,c(2:6)], by=c("position"), all=TRUE)
 results$NormUcount [is.na(results$NormUcount)] <- 1	# permet de remplacer les valeurs NA d'une colonne par 1
 n1<-nrow(results)
 
-# Il faut créer une colonne "ratio" au préalable, sinon R n'exécute pas le calcul du ratio
-results$ratio <- NA	# Bien mettre NA, et non une valeur numérique, car cela va attribuer la valeur numérique à la première ligne, qui ne doit pas contenir de valeur.
+# Il faut crÃ©er une colonne "ratio" au prÃ©alable, sinon R n'exÃ©cute pas le calcul du ratio
+results$ratio <- NA	# Bien mettre NA, et non une valeur numÃ©rique, car cela va attribuer la valeur numÃ©rique Ã  la premiÃ¨re ligne, qui ne doit pas contenir de valeur.
 
 for (i in 2:n1) {results$ratio[i] = (results$NormUcount[i]/results$NormUcount[i-1])}		# permet de calculer un ratio entre deux valeurs de counts
 
@@ -102,7 +101,7 @@ j <- i-2
 k <- i-1 
 l <- i+1 
 m <- i+2
-results$around[i] = (1 - results$ratio[i]/(mean(results$ratio[j:k])+ mean (results$ratio[l:m])))}		# Quantification de la variabilité de notre résultat par rapport à ses 12 valeurs voisines
+results$around[i] = (1 - results$ratio[i]/(mean(results$ratio[j:k])+ mean (results$ratio[l:m])))}		# Quantification de la variabilitÃ© de notre rÃ©sultat par rapport Ã  ses 12 valeurs voisines
 
 results$deviation <- NA
 for (i in 4:n1) {
@@ -110,7 +109,7 @@ j <- i-3
 k <- i-1 
 l <- i+1 
 m <- i+3
-results$deviation[i] = (1 - results$around[i]/(sd(results$around[j:k])+ sd(results$around[l:m])))}	# Mesure de la variance de nos résultats pour chaque position
+results$deviation[i] = (1 - results$around[i]/(sd(results$around[j:k])+ sd(results$around[l:m])))}	# Mesure de la variance de nos rÃ©sultats pour chaque position
 
 results$ratio2 <- NA	
 for (i in 2:n1) {results$ratio2[i] = 1/results$ratio[i]}		# Inverse du premier ratio
@@ -121,10 +120,10 @@ j <- i-2
 k <- i-1 
 l <- i+1 
 m <- i+2
-results$around2[i] = (1 - results$ratio2[i]/(mean(results$ratio2[j:k])+ mean (results$ratio2[l:m])))}		# Autre quantification de la variabilité de notre résultat
+results$around2[i] = (1 - results$ratio2[i]/(mean(results$ratio2[j:k])+ mean (results$ratio2[l:m])))}		# Autre quantification de la variabilitÃ© de notre rÃ©sultat
 
 results$cumul <- NA
-for (i in 3:n1) {results$cumul[i] = (results$around[i]+results$around2[i+1])/2}		# Moyenne des deux valeurs de variance calculées
+for (i in 3:n1) {results$cumul[i] = (results$around[i]+results$around2[i+1])/2}		# Moyenne des deux valeurs de variance calculÃ©es
 
 results$mean <- NA
 for (i in 3:n1) {results$mean[i] = results$cumul[i]}		# Correspond au score MEAN
