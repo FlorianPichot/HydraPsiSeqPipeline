@@ -1,5 +1,5 @@
 # HydraPsiSeqPipeline
-You will find here the different RiboMethSeq pipelines used by the NGS Core Facility "EpiRNA-Seq" from Nancy, France (https://umsibslor.univ-lorraine.fr/en/facility/epitranscriptomics-sequencing-epirna-seq).
+You will find here the different HydraPsiSeq pipelines used by the NGS Core Facility "EpiRNA-Seq" from Nancy, France (https://umsibslor.univ-lorraine.fr/en/facility/epitranscriptomics-sequencing-epirna-seq).
 
 !!! Be aware !!! All the scripts has been used in a local computer, with relatives paths for the inputs and outputs. If you want to use these scripts on your own, please be careful of the inputs and directories names along the script.
 
