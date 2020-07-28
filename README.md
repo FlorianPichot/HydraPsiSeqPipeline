@@ -5,6 +5,12 @@ You will find here the different HydraPsiSeq pipelines used by the NGS Core Faci
 
 Every manual input that you should modify will be indicated by this symbol: //!\\\
 
+# Requirements
+
+An Unix shell and the R software are needed to use this scripts.
+
+The "Unix_scripts" needs Trimmomatic, Bowtie2 and Bedtools. You can naturally use your own trimmming and alignment tools if you prefer, but be sure that the trimming output is in FASTQ format, and the alignment output in SAM format. Bedtools is mandatory.
+
 # Pipeline workflow
 
 General workflow :
@@ -19,3 +25,6 @@ Transcriptome workflow :
 
 Analysis with list (R script ) requires a list of known pseudouridine sites or putative pseudouridylated candidates.
 The file "Hs_rRNA_modList.csv" is a template of such list which regroups known modified sites in human rRNAs.
+
+
+
