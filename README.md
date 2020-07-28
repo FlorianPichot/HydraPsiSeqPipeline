@@ -7,10 +7,6 @@ Every manual input that you should modify will be indicated by this symbol: //!\
 
 # Pipeline workflow
 
---------------------------             ----------------------------             ------------------------------------            ----------------------------------
 | Trimming (Unix script) |    -->      | Alignement (Unix script) |     -->     | NormUCount generation (R script) |    -->     | Analysis with list (R script ) |
---------------------------             ----------------------------     |       ------------------------------------     |      ----------------------------------
                                                                         |                                                |
-                                                                        |      ---------------------------------------   | 
                                                                         -->    | NormUCount transcriptome (R script) |  --
-                                                                               ---------------------------------------
