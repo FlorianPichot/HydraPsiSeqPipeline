@@ -14,5 +14,3 @@ Every manual input that you should modify will be indicated by this symbol: //!\
                                                                         |      ---------------------------------------   | 
                                                                         -->    | NormUCount transcriptome (R script) |  --
                                                                                ---------------------------------------
-                      
-| rewrewrewr |
