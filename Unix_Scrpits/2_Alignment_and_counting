@@ -1,45 +1,11 @@
 #!/bin/sh
 
-#GO to iGenomes folder
-#cd /illumina/runs/iGenomes
-G=$1`echo "*.fa"`
-
-Genome=`find /illumina/runs/iGenomes -type f -name "$G" -print`
-echo "------------------------------------------------------------------------------------------------------"
-echo "Genome to USE: $Genome"
-echo "------------------------------------------------------------------------------------------------------"
-echo "VERIFY the name of desired reference sequence IF OK, press ENTER to continue, if NOT press N and ENTER"
-echo "------------------------------------------------------------------------------------------------------"
-read opt
-if [ "$opt" ==  "" ];
-then
-#CONSTRUCT PATH TO bt2 files and fa files for genome
-iGenome="/"
-FAPath=$iGenome${Genome:1}
-echo "FAPath: $FAPath"
-BTPath=${FAPath%???}
-echo "BTPath: $BTPath"
-date >> AlignmentReference.txt
-echo "FAPath: $FAPath" >>  AlignmentReference.txt 
-
-#END OF REF SEARCH
-fi
-
-#READ FOLDER LIST
-
-DIRLIST=$(find . -maxdepth 1 -mindepth 1 -type d -exec basename {} \;)
-
-echo "FOUND SAMPLE FOLDERS : $DIRLIST"
-
-for folder in ${DIRLIST[@]}
-do
-cd $folder
-pwd
-
 #reading of generated trimmed files
-FN=""
-for i in T*.gz; do FN=`echo $FN$i,`; done
-FN="${FN%?}"
+
+#FN = Input files //!\\
+#BTPath = Path to Bowtie index //!\\
+#FAPath = Path to reference fasta file //!\\
+
 echo "BOWTIE 2 file list : $FN"
 nohup bowtie2  --no-1mm-upfront -D 15 -R 2 -N 0 -L 10 -i S,1,1.15   -p 16 -x $BTPath  -U $FN -S tmp.sam  --un-gz Non_rtRNA_$folder.fastq.gz > nohup_bowtieL10EtoE_rtRNA_$folder.out 
 
@@ -103,15 +69,3 @@ done < RNA_list.csv
 rm mapped_RNA.bam
 rm  mapped_RNA.bed
 rm unique_RNA_$folder.sam
-
-cd ..
-done
-
-
-
-
-
-
-
-
-
