@@ -9,8 +9,13 @@ Every manual input that you should modify will be indicated by this symbol: //!\
 
 General workflow :
 
-| Trimming (Unix script) |    -->      | Alignement (Unix script) |     -->     | NormUCount generation (R script) |    -->     | Analysis with list (R script ) |
+| Trimming (Unix script) |    -->      | Alignement (Unix script) |     -->     | NormUCount generation (R script) |    -->     | Analysis with list (R script) |
                                                                                                                                    
 Transcriptome workflow :             
 
-| Trimming (Unix script) |    -->      | Alignement (Unix script) |     -->    | NormUCount transcriptome (R script) |   -->     | Analysis with list (R script ) |
+| Trimming (Unix script) |    -->      | Alignement (Unix script) |     -->    | NormUCount transcriptome (R script) |   -->     | Analysis with list (R script) |
+
+
+
+Analysis with list (R script ) requires a list of known pseudouridine sites or putative pseudouridylated candidates.
+The file "Hs_rRNA_tRNA_modList.csv" is a template of such list which regroups known pseudouridine sites in human rRNAs and tRNAs.
