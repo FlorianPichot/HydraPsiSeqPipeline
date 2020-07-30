@@ -1,13 +1,14 @@
 #SCRIPT TO calculate Normalized U profile
-#uses UCount5prime_RNA and coverage_Thr_RNA + RNA_list in folder
 rm(list=ls(all=TRUE)) #REMOVE ALL Variables
 
-####### Zone à modifier #######
-extDataDir <-"R:/PROJECTS/PsiSeq/HUMAN_rRNA/E011_Project_AW_Psi_diff_run70_105"		# Localisation du fichier contenant les données des échantillons
-####### Zone à modifier ######
+####### Input area #######
+#extDataDir <- "Path/to/input"	//!\\
+#ProjectDir <- "Path/to/output" //!\\
 
-########################### SET DATA FOLDER FROM CLIPBOARD ######################################### 
-extDataDir  <- gsub  ( "\\\\",  "/",  readClipboard ()  ) #READ FROM CLIPBOARD AND send to extDataDir
+if (!requireNamespace("ggplot2", quietly = TRUE)) {install.packages("ggplot2")}
+library(ggplot2)   
+
+###### Treatment area ######
 setwd(extDataDir)
 
 project <-sub('.*\\/', '', extDataDir)  #FIND THE LAST "/" in the path and return the right string
@@ -15,9 +16,8 @@ print (extDataDir)
 print (project)
 
 #################CREATE FOLDER FOR ANALYSIS
-ProjectDir <- paste0("D:/R_folder/",project)
-dir.create (ProjectDir, showWarnings = FALSE) #CREATE PROJECT FOLDER IN D:/R_folder
-ResultsDir <-paste0(ProjectDir,"/PreAnalysis")
+dir.create (ProjectDir, showWarnings = FALSE)
+ResultsDir <-paste0(ProjectDir,"/PreAnalysis") # Sub output folder
 dir.create (ResultsDir, showWarnings = FALSE)  #CREATE PreAnalysis folder
 ###########################################
 
@@ -71,7 +71,7 @@ statRNA[1]<-sum(FullRNA$counts) #NUMBER OF COUNTS for RNA
 statRNA[2] <- nrow(FullRNA[which(FullRNA$counts == 0),])  #ZERO COVERAGE positions
 
 
-  #NORMALIZATION by window of 11 with non-T signals (special treatment for 5 first and 5 last positions)
+#NORMALIZATION by window of 11 with non-T signals (special treatment for 5 first and 5 last positions)
 
 FullRNA$NormMedian <- NA
 FullRNA$Nwindow <- NA
@@ -125,7 +125,6 @@ dir.create (SampleDir, showWarnings = FALSE) #CREATE Sample FOLDER IN Preanalysi
 
 
 df <- FullRNA[,c(4:7)]
-library(ggplot2)
 
 msize.x=1 #parameters used in inch
 msize.y=1
