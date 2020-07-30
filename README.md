@@ -23,7 +23,7 @@ Transcriptome workflow :
 
 
 
-Analysis with list (R script ) requires a list of known pseudouridine sites or putative pseudouridylated candidates.
+Analysis with list (R script) requires a list of known pseudouridine sites or putative pseudouridylated candidates.
 The file "Hs_rRNA_modList.csv" is a template of such list which regroups known modified sites in human rRNAs.
 
 
