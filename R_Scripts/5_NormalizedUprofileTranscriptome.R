@@ -1,9 +1,13 @@
 #SCRIPT TO calculate Normalized U profile
-#uses UCount5prime_RNA and coverage_Thr_RNA + RNA_list in folder
 rm(list=ls(all=TRUE)) #REMOVE ALL Variables
 
-#Read Folder name from CLIPBOARD
-extDataDir <- gsub ( "\\\\", "/", readClipboard () ) #READ FROM CLIPBOARD AND send to extDataDir
+####### Input area #######
+#extDataDir <- "Path/to/input"	//!\\ # output will be put there also
+
+if (!requireNamespace("ggplot2", quietly = TRUE)) {install.packages("ggplot2")}
+library(ggplot2)   
+
+###### Treatment area ######
 setwd(extDataDir)
 #Select the Folder Name and use as Project Name
 project <-sub('.*\\/', '', extDataDir) #FIND THE LAST "/" in the path and return the right string
@@ -62,8 +66,6 @@ RNA_length <- nrow(coverage)
 #VERIFY reads COVERAGE if <5 skip all calculations and go to next RNA 
 if (Ncounts/RNA_length >5) {
 
-#assign(paste0(basename(z)),sample) #WHY TO USE THIS ?
-
 FullRNA<-merge(coverage,sample, by="position", all=TRUE) #merge coverage and counts
 FullRNA<-FullRNA[-1,] #SKIP First row
 FullRNA[is.na(FullRNA)] <- 0 #replace missing values by zero
@@ -72,7 +74,7 @@ statRNA[1]<-sum(FullRNA$counts) #NUMBER OF COUNTS for RNA
 statRNA[2] <- nrow(FullRNA[which(FullRNA$counts == 0),])  #ZERO COVERAGE positions
 
 
-  #NORMALIZATION by window of 11 with non-T signals (special treatment for 5 first and 5 last positions)
+#NORMALIZATION by window of 11 with non-T signals (special treatment for 5 first and 5 last positions)
 
 FullRNA$NormMedian <- NA
 FullRNA$Nwindow <- NA
