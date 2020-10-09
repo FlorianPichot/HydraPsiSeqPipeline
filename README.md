@@ -7,7 +7,7 @@ Every manual input that you should modify will be indicated by this symbol: //!\
 
 # Requirements
 
-An Unix shell and the R software are needed to use this scripts.
+An Unix shell and the R software are needed to use these scripts.
 
 The "Unix_scripts" needs Trimmomatic, Bowtie2 and Bedtools. You can naturally use your own trimmming and alignment tools if you prefer, but be sure that the trimming output is in FASTQ format, and the alignment output in SAM format. Bedtools is mandatory.
 
